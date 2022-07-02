@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css';
-import {Typography, Box, Grid, Button} from '@material-ui/core';
+import {Typography,Box,Grid,Button} from '@material-ui/core';
 
 function Home() { //ATENÇÃO: Um Componente só irá poder retornar UM ELEMENTO! Se quiser mais
     return( // de um, precisa colocar eles dentro de um Container!!!

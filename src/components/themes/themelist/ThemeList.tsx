@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import './ThemeList.css';
 
-function ThemeList() {
+function listaTema() {
 
   return(
     <>
@@ -41,4 +41,4 @@ function ThemeList() {
   );
 }
 
-export default ThemeList;
+export default listaTema;

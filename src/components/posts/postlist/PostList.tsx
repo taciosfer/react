@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import './PostList.css';
 
-function PostList() {
+function listaPostagem() {
 
   return(
     <>
@@ -47,4 +47,4 @@ function PostList() {
     )
 }
 
-export default PostList;
+export default listaPostagem;

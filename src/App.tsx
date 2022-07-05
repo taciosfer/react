@@ -6,6 +6,8 @@ import Footer from './components/static/footer/Footer';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
+import ThemeList from './components/themes/themelist/ThemeList';
+import PostList from './components/posts/postlist/PostList';
 
 function App() {
   return(
@@ -17,6 +19,8 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/home" element={<Home/>}/>
           <Route path="/signup" element={<Signup/>}/>
+          <Route path="/themes" element={<ThemeList/>}/>
+          <Route path="/posts" element={<PostList/>}/>
         </Routes>
       </div>
       <Footer />

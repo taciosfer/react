@@ -5,7 +5,9 @@
 
 .box2 {
     background-color: #303F9F;
-    height: 60px;    
+    height: 60px;
+    display: flex;
+    flex-direction: column;
 }
 
 .redes {
@@ -15,4 +17,5 @@
 
 .textos {
     color: white;
+    text-decoration: none !important;
 }

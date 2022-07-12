@@ -6,7 +6,7 @@ import useLocalStorage from 'react-use-localstorage';
 import { findByDisplayValue } from '@testing-library/react';
 import { buscaId, post, put } from '../../../services/Service';
 import './ThemeRegister.css';
-// import { buscaId, post, put } from '../../../services/Service';
+
 
 function CadastroTema() {
     let history = useNavigate();

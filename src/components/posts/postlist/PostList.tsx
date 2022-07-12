@@ -2,20 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Postagem from '../../../models/Postagem';
 import { busca } from '../../../services/Service';
-import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import './PostList.css';
-import useLocalStorage from 'react-use-localstorage';
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/TokensReducer';
 
 function ListaPostagem() {
+  let navigate = useNavigate();
   const [posts, setPosts] = useState<Postagem[]>([])
-  const [token, setToken] = useLocalStorage('token');
-  let history = useNavigate();
-
+  const token = useSelector<TokenState, TokenState["tokens"]> (
+    (state) => state.tokens
+  );
+  
   useEffect(() => {
     if (token == "") {
       alert("Login Necessário")
-      history("/login")
+      navigate("/login")
     }
   }, [token])
 

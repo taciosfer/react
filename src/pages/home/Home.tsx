@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Home.css';
 import { Typography, Box, Grid, Button } from '@material-ui/core';
 import PostTab from '../../components/posts/posttab/PostTab';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../store/tokens/TokensReducer';
+import { Link } from 'react-router-dom';
 
-function Home() { //ATENÇÃO: Um Componente só irá poder retornar UM ELEMENTO! Se quiser mais
-    return( // de um, precisa colocar eles dentro de um Container!!!
+function Home() {
+    let navigate = useNavigate();
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+    );
+    
+    useEffect(() => {
+        if(token == "") {
+            alert("É Necessário Estar Logado!")
+            navigate("/login")
+        }
+    }, [token])
+                    //ATENÇÃO: Um Componente só irá poder retornar UM ELEMENTO! Se quiser mais
+    return(         // de um, precisa colocar eles dentro de um Container!!!
         <>
         <Grid container direction="row" justifyContent="center" alignItems="center" className='caixa'>
                 <Grid alignItems="center" item xs={6}>
@@ -15,7 +31,9 @@ function Home() { //ATENÇÃO: Um Componente só irá poder retornar UM ELEMENTO
                     <Box display="flex" justifyContent="center">
                         <Box marginRight={1}>
                         </Box>
-                        <Button variant="outlined" className='botao'>Ver Postagens</Button>
+                        <Link to="/posts" className="text-decorator-none">
+                            <Button variant="outlined" className='botao'>Ver Postagens</Button>
+                        </Link>
                     </Box>
                 </Grid>
                 <Grid item xs={6}>

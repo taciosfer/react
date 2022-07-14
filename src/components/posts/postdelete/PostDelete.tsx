@@ -2,24 +2,37 @@ import React, { useEffect, useState } from 'react'
 import {Typography, Button, Box, Card, CardActions, CardContent } from "@material-ui/core"
 import './PostDelete.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
 import Postagem from '../../../models/Postagem';
 import { buscaId, deleteId } from '../../../services/Service';
+import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/TokensReducer';
 
 function DeletarPostagem() {
-    let history = useNavigate();
+    let navigate = useNavigate();
     const { id } = useParams<{id: string}>();
-    const [token, setToken] = useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+      (state) => state.tokens
+    );
     const [post, setPosts] = useState<Postagem>()
 
     useEffect(() => {
         if (token == "") {
-            alert("Você precisa estar logado")
-            history("/login")
+          toast.error('É Necessário Estar Logado!', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "colored",
+            progress: undefined,
+        });  
+            navigate("/login")
         }
     }, [token])
 
-    useEffect(() =>{
+    useEffect(() => {
         if(id !== undefined) {
             findById(id)
         }
@@ -33,43 +46,52 @@ function DeletarPostagem() {
         })
     }
 
-        function sim() {
-            history('/posts')
-            deleteId(`/postagens/${id}`, {
-              headers: {
-                'Authorization': token
-              }
-            });
-            alert('Deleted Successfully');
+    function sim() {
+      navigate('/posts')
+        deleteId(`/postagens/${id}`, {
+          headers: {
+            'Authorization': token
           }
+        });
+        toast.success('Postagem Deletada com Sucesso!', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "colored",
+          progress: undefined,
+        });
+    }
         
-          function nao() {
-          history('/posts')
-          }
+    function nao() {
+      navigate('/posts')
+    }
 
   return(
     <>
       <Box m={2}>
-        <Card variant="outlined" >
+        <Card variant="outlined">
           <CardContent>
             <Box justifyContent="center">
               <Typography color="textSecondary" gutterBottom>
                 Delete Post?
               </Typography>
-              <Typography color="textSecondary" >
+              <Typography color="textSecondary">
               {post?.titulo}
               </Typography>
             </Box>
           </CardContent>
           <CardActions>
-            <Box display="flex" justifyContent="start" ml={1.0} mb={2} >
+            <Box display="flex" justifyContent="start" ml={1.0} mb={2}>
               <Box mx={2}>
               <Button onClick={sim} variant="contained" className="marginLeft" size='large' color="primary">
                 Sim
               </Button>
               </Box>
               <Box>
-              <Button  onClick={nao} variant="contained" size='large' color="secondary">
+              <Button onClick={nao} variant="contained" size='large' color="secondary">
                 Não
               </Button>
               </Box>
@@ -80,4 +102,5 @@ function DeletarPostagem() {
     </>
   );
 }
+
 export default DeletarPostagem;

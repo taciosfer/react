@@ -14,10 +14,13 @@ import DeletarTema from './components/themes/themedelete/ThemeDelete';
 import ListaTema from './components/themes/themelist/ThemeList';
 import { Provider } from 'react-redux';
 import store from './store/Store';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return(
     <Provider store={store}>
+      <ToastContainer/>
     <Router>
       <Navbar/>
       <div style={{minHeight: '100vh'}}>

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/TokensReducer';
+import { toast } from 'react-toastify';
 
 function ListaPostagem() {
   let navigate = useNavigate();
@@ -18,7 +19,16 @@ function ListaPostagem() {
   
   useEffect(() => {
     if (token == "") {
-      alert("Login Necessário")
+      toast.error('É Necessário Estar Logado!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "colored",
+        progress: undefined,
+    });
       navigate("/login")
     }
   }, [token])

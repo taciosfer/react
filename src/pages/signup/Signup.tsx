@@ -4,6 +4,7 @@ import { Grid, Box, Typography, Button, TextField } from '@material-ui/core';
 import { Link, useNavigate } from 'react-router-dom';
 import User from '../../models/User';
 import { signup } from '../../services/Service';
+import { toast } from 'react-toastify';
 
 function Signup() {
     let navigate = useNavigate();
@@ -25,10 +26,9 @@ function Signup() {
         })
 
     useEffect(() => {
-        if (userResult.id != 0) {
+        if (userResult.id !== 0) {
             navigate("/login")
         }
-        
     }, [userResult])
 
     function confirmarSenhaHandle(e: ChangeEvent<HTMLInputElement>) {
@@ -46,16 +46,34 @@ function Signup() {
         e.preventDefault()
         if(confirmarSenha == user.senha) {
         signup(`/usuarios/cadastrar`,user,setUserResult)
-        alert('Usuario Cadastrado com Sucesso!')
-        } else {
-            alert('Dados inconsistentes. Verifique informações de cadastro.')
+        toast.success('Usuário Cadastrado com Sucesso!', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "colored",
+            progress: undefined,
+        });
+        }
+        else {
+            toast.error('Dados inconsistentes. Verifique informações de cadastro.', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+              });
         }
     }
 
     return(
         <Grid container direction='row' justifyContent='center' alignItems='center'>
             <Grid item xs={6} className='imagem2'>
-
             </Grid>
             <Grid item xs={6} alignItems='center'>
                 <Box paddingX={10}>
@@ -72,7 +90,7 @@ function Signup() {
                                 </Button>
                             </Link>
                             <Button type='submit' variant='contained' color='primary'>
-                                    Cadastrar
+                                Cadastrar
                             </Button>
                         </Box>
                     </form>

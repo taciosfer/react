@@ -44,7 +44,7 @@ function Signup() {
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
-        if(confirmarSenha == user.senha) {
+        if(confirmarSenha === user.senha) {
         signup(`/usuarios/cadastrar`,user,setUserResult)
         toast.success('Usuário Cadastrado com Sucesso!', {
             position: "top-right",

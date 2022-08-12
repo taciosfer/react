@@ -19,7 +19,7 @@ function DeletarTema() {
     const [tema, setTema] = useState<Tema>()
 
     useEffect(() => {
-      if (token == "") {
+      if (token === "") {
         toast.error('É Necessário Estar Logado!', {
           position: "top-right",
           autoClose: 2000,

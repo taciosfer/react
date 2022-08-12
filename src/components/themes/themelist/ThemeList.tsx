@@ -16,7 +16,7 @@ function ListaTema() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    if(token == '') {
+    if(token === '') {
       toast.error('É Necessário Estar Logado!', {
         position: "top-right",
         autoClose: 2000,
